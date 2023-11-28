@@ -3,7 +3,7 @@
 import puppeteer from 'puppeteer';
 
 async function main() {
-    console.log('here we go');
+   
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
@@ -28,12 +28,12 @@ async function main() {
         for (const task of tasks) {
             const addButton = await page.$('.plus_add_button');
             await addButton.click();
-           
-            await page.waitForSelector('task_editor__editing_area', { visible: true });
 
-            await page.type('.task_editor p', 'Lo que sea');
-            await page.keyboard.press('Enter');
-            await page.waitForTimeout(1000); // Esperar un segundo entre tareas
+            await page.waitForSelector('.items', { visible: true });
+            const elementoP = await page.$('p[data-placeholder="Nombre de la tarea"].is-empty.is-editor-empty');
+            console.log(elementoP);
+
+
         }
 
     } catch ( error ) {
